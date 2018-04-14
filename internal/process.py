@@ -37,6 +37,28 @@ class ProcessFile:
         # for i in site_dict:
         #     self.site.insert(i)
 
+    
+    def load_sites(self):
+        data = [
+            { "site" : "E2", "income" : 540 },
+            { "site" : "N4", "income" : 492 },
+            { "site" : "N3B", "income" : 349 },
+            { "site" : "NR1", "income" : 349 },
+            { "site" : "H3", "income" : 321 },
+            { "site" : "WC2", "income" : 369 },
+            { "site" : "E13", "income" : 305 },
+            { "site" : "K5", "income" : 607 },
+            { "site" : "K6", "income" : 527 },
+            { "site" : "GB1", "income" : 410 },
+            { "site" : "N9", "income" : 389 },
+            { "site" : "NC3", "income" : 443 },
+            { "site" : "E4", "income" : 347 },
+            { "site" : "BR5", "income" : 302 }
+        ]
+
+        for i in data:
+            self.income.insert(i)
+
     def parse_csv(self, csv_file):
         data = []
         with open(csv_file, 'rt') as cf:
