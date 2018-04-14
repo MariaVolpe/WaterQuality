@@ -14,9 +14,6 @@ class Calculations:
         #collection: sites with income
         self.income = self.db.income
 
-        self.generate_line_graph()
-        #self.generate_weather_bar()
-
     #x is income
     #y is bacteria averages
     def generate_line_graph(self):
