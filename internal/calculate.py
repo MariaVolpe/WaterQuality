@@ -7,64 +7,57 @@ client = MongoClient()
 
 class Calculations:
     
-    def __init__:
+    def __init__(self):
         self.db = client.WaterQualityDB
         #collection: bacteria
         self.bacteria = self.db.bacteria
         #collection: sites with income
         self.income = self.db.income
 
+        self.generate_line_graph()
+        #self.generate_weather_bar()
 
-    #y is income
-    #x is bacteria averages
+    #x is income
+    #y is bacteria averages
     def generate_line_graph(self):
 
         income_arr = []
         wet_arr = []
         dry_arr = []
-        n = self.incomes.find()
+        n = self.income.find()
         for i in n:
             income_arr.append( int(i["income"]) )
             wet_arr.append( self.site(i["site"], "W") )
             dry_arr.append( self.site(i["site"], "D") )
 
         wet_line = go.Scatter(
-            x= wet_arr,
-            y= income_arr
+            y= wet_arr,
+            x= income_arr,
+            name = 'Wet Day'
         )
 
         dry_line = go.Scatter(
-        x= dry_arr,
-        y= income_arr
+            y= dry_arr,
+            x= income_arr,
+            name = 'Dry Day'
         )
-        graph_data = Data([wet_line, dry_line])
 
-        py.plot(graph_data, filename = 'income-to-site-scatter')
+        graph_data = [wet_line, dry_line]
+
+        py.plot(graph_data, filename = 'income-to-site-line')
 
 
     def generate_weather_bar(self):
         
         wet = self.weather_calculations("W")
         dry = self.weather_calculations("D")
-    
-        y_labels = ["Wet Weather", "Dry Weather"]
-        x_labels = []
 
         data = [go.Bar(
-            #x = x_labels,
-            y = y_labels,
-            text = y,
-            textposition = 'auto',
-            marker=dict(
-                color='rgb(158,202,225)',
-                line=dict(
-                    color='rgb(8,48,107)',
-                    width=1.5),
-            ),
-            opacity=0.6
+                y = [wet, dry],
+                x = ["Wet Weather", "Dry Weather"]
         )]
 
-    py.plot(data, filename='wet-dry-bar')
+        py.plot(data, filename='wet-dry-bar')
 
 
     #return average total with specified condition
@@ -73,17 +66,17 @@ class Calculations:
         n = self.bacteria.find( {"Weather":condition} )
         for i in n:
             if i["Enterococcus"] != "NS":
-                data.append( int(i["Enterococcus"]) )
+                data.append( float(i["Enterococcus"]) )
 
         return self.average(data)
 
     #condition: "W" (Wet) or "D" (Dry)
     def site(self, site, condition):
         data = []
-        n = self.bacteria.find( "$AND" : [{"Site": site}, {"Weather":condition}]})
+        n = self.bacteria.find( {"$and" : [{"Site": site}, {"Weather":condition}]})
         for i in n:
             if i["Enterococcus"] != "NS":
-                data.append( int(i["Enterococcus"] ))
+                data.append( float(i["Enterococcus"] ))
 
         return self.average(data)
 

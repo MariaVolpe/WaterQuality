@@ -1,17 +1,29 @@
 from pymongo import MongoClient
 from pprint import pprint
+import csv
 
 client = MongoClient()
 
 class ProcessFile:
-    
-    def __init__:
+
+    def __init__(self):
         self.db = client.WaterQualityDB
 
         #collection: bacteria
         self.bacteria = self.db.bacteria
         #collection: site keys
-        self.sites = self.db.sites
+        self.income = self.db.income
+        
+        #self.bacteria.drop()
+        #self.income.drop()
+
+        # for doc in self.bacteria.find({}):
+        #     pprint( doc )
+
+        # for doc in self.income.find({}):
+        #     pprint( doc )
+
+    #in this demo, file comes precleaned and not pulled from web
 
     #pull file from web
     def get_file():
@@ -25,18 +37,11 @@ class ProcessFile:
     def clean_file():
         dummy = 0
 
-
     #load into collection in db
     def load_bacteria(self):
-
-        data_dict = self.parse_csv('data/harbor_sampling_ytd_2018')
+        data_dict = self.parse_csv('./data/harbor_sampling_ytd_2017.csv')
         for i in data_dict:
             self.bacteria.insert(i)
-
-        # site_dict = self.parse_csv('data/harbor_sampling_coordinates')
-        # for i in site_dict:
-        #     self.site.insert(i)
-
     
     def load_sites(self):
         data = [
