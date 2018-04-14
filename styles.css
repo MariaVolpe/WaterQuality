@@ -1,0 +1,36 @@
+body{
+    font-family: Helvetica;
+    color: #000000;
+    font-size: 16px;
+    
+}
+
+.content {
+    max-width: 600px;
+    margin: auto;
+    background-color: #c1dbff;
+}
+
+
+a{
+    font-family: Helvetica;
+    color: #000000;
+    font-size: 17px;
+    letter-spacing: 1px;
+}
+
+p{
+    font-family: Helvetica;
+    color: #000000;
+    font-size: 16px;
+}
+
+h2{
+    font-family: Helvetica;
+    color: #2376B4;
+}
+h3{
+    font-family: Helvetica;
+    color: #2376B4;
+}
+
