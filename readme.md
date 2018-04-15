@@ -1,3 +1,5 @@
+Maria Volpe for Div Hacks 2018
+
 Run instructions:
 
 Run command "mongod" from terminal, then open another terminal tab or window to proceed in.
